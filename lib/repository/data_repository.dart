@@ -14,7 +14,6 @@ class DataRepository implements Repository<ConditionData> {
 
       dataList.forEach((element) {
         result.add(ConditionData.fromJson(element));
-        print('input: ${result.last}');
       });
     }
 

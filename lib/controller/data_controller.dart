@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:test_task_wsp/controller/controller.dart';
 import 'package:test_task_wsp/model/condition_data.dart';
-import 'package:test_task_wsp/model/result.dart';
 import 'package:test_task_wsp/repository/data_repository.dart';
 
 class DataController with ChangeNotifier implements Controller {
@@ -18,7 +17,6 @@ class DataController with ChangeNotifier implements Controller {
   Future<void> post(dynamic data, String apiPath) async{
     await _pointRepository.post(data, apiPath);
     notifyListeners();
-    ///TODO Сделай 2 страницы, а потом возвращайся сюда :)
   }
 
 }

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:test_task_wsp/algorithm/breadth_first_search.dart';
-import 'package:test_task_wsp/controller/data_controller.dart';
-import 'package:test_task_wsp/controller/result_controller.dart';
-import 'package:test_task_wsp/model/result.dart';
+//import 'package:test_task_wsp/controller/data_controller.dart';
+//import 'package:test_task_wsp/controller/result_controller.dart';
 import 'package:test_task_wsp/ui/screen/result_screen.dart';
 import 'package:test_task_wsp/ui/widget/bottom_wide_button.dart';
 
@@ -15,8 +14,8 @@ class ProcessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pathfinder = context.watch<BreadthFirstSearch>();
-    final dataController = context.watch<DataController>();
-    final resultController = context.watch<ResultController>();
+    //final dataController = context.watch<DataController>();
+    //final resultController = context.watch<ResultController>();
 
     return Scaffold(
       appBar: AppBar(

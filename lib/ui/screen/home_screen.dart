@@ -4,7 +4,6 @@ import 'package:test_task_wsp/algorithm/breadth_first_search.dart';
 import 'package:test_task_wsp/algorithm/result_parser.dart';
 import 'package:test_task_wsp/controller/data_controller.dart';
 import 'package:test_task_wsp/controller/result_controller.dart';
-import 'package:test_task_wsp/model/result.dart';
 import 'package:test_task_wsp/ui/screen/process_screen.dart';
 import 'package:test_task_wsp/ui/widget/bottom_wide_button.dart';
 
