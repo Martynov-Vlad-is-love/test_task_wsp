@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:test_task_wsp/algorithm/breadth_first_search.dart';
+
 //import 'package:test_task_wsp/controller/data_controller.dart';
 //import 'package:test_task_wsp/controller/result_controller.dart';
 import 'package:test_task_wsp/ui/screen/result_screen.dart';
@@ -67,15 +68,17 @@ class ProcessScreen extends StatelessWidget {
                   BottomWideButton(
                       text: 'Send results to server',
                       size: size,
-                      onPressed: () async{
+                      onPressed: () async {
                         //await dataController.post();
-                        Navigator.push<void>(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) =>
-                            const ResultScreen(),
-                          ),
-                        );
+                        if (pathfinder.progress == 1) {
+                          Navigator.push<void>(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const ResultScreen(),
+                            ),
+                          );
+                        }
                       }),
                 ]),
               )

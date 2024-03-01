@@ -107,13 +107,10 @@ class GraphicPathScreen extends StatelessWidget {
                 );
               }),
         ),
-        Expanded(
-            flex: 1,
-            child: Text(
-              resultController.results[index].resultPath,
-              style:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-            )),
+        Text(
+          resultController.results[index].resultPath,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        ),
       ]),
     );
   }

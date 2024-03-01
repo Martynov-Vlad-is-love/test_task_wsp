@@ -97,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         String api = _textController.text;
                         final isValid = _apiValidator(api, context);
                         if (isValid) {
+                          pathfinder.updateProgress(0.0);
                           Navigator.push<void>(
                             context,
                             MaterialPageRoute<void>(

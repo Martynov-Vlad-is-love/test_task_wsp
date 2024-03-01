@@ -40,17 +40,20 @@ class _HomeScreenState extends State<ResultScreen> {
                                   GraphicPathScreen(index: index)));
                     },
                     child: Container(
-                      color: Colors.blue,
-                      width: size.width*0.9,
-                      height: size.height*0.1,
+                      color: Colors.white,
+                      width: size.width * 0.9,
+                      height: size.height * 0.1,
                       child: Center(
-                          child: Text(resultController.results[index].resultPath)),
+                          child:
+                              Text(resultController.results[index].resultPath)),
                     ),
                   ),
                 );
               },
               separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(),
+                  const Divider(
+                    color: Colors.grey,
+                  ),
               itemCount: resultController.results.length),
         ));
   }
