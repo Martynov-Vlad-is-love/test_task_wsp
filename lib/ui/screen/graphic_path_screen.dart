@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_task_wsp/algorithm/field_parser.dart';
 import 'package:test_task_wsp/controller/result_controller.dart';
 
 class GraphicPathScreen extends StatelessWidget {
@@ -53,52 +54,16 @@ class GraphicPathScreen extends StatelessWidget {
                 final firstPoint = convertedFields[index]?[0];
                 final secondPoint = convertedFields[index]?[1];
                 final textPoint = '($firstPoint.$secondPoint)';
-
-                List<List<int>> waypoints = [];
-                result.rawResult.forEach((element) {
-                  final point = [element.x, element.y];
-                  waypoints.add(point);
-                });
-
-                final List<List<int>> blockedPoints = [];
-
-                for (int firstIterator = 0;
-                    firstIterator < result.fields.length;
-                    firstIterator++) {
-                  String currentString = result.fields[firstIterator];
-                  for (int secondIterator = 0;
-                      secondIterator < currentString.length;
-                      secondIterator++) {
-                    if (currentString[secondIterator] == 'X') {
-                      blockedPoints.add([secondIterator, firstIterator]);
-                    }
-                  }
-                }
-
-                Color curColor = Colors.white;
                 TextStyle textColor = const TextStyle(color: Colors.black);
-                waypoints.forEach((element) {
-                  if (element[0] == firstPoint && element[1] == secondPoint) {
-                    if (element == waypoints.first) {
-                      curColor = const Color(0xFF64FFDA);
-                    } else if (element == waypoints.last) {
-                      curColor = const Color(0xFF009688);
-                    } else {
-                      curColor = const Color(0xFF4CAF50);
-                    }
-                  }
-                });
-                blockedPoints.forEach((element) {
-                  if (element[0] == firstPoint && element[1] == secondPoint) {
-                    curColor = Colors.black;
-                    textColor = const TextStyle(color: Colors.white);
-                  }
-                });
-
+                final color = FieldParser.colorByPoints(
+                    fields, result.rawResult, firstPoint, secondPoint);
+                if (color == Colors.black) {
+                  textColor = const TextStyle(color: Colors.white);
+                }
                 return Container(
                   width: 100,
                   height: 100,
-                  color: curColor,
+                  color: color,
                   child: Center(
                       child: Text(
                     textPoint,
