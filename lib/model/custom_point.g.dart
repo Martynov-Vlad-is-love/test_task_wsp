@@ -14,6 +14,6 @@ _$CustomPointImpl _$$CustomPointImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$CustomPointImplToJson(_$CustomPointImpl instance) =>
     <String, dynamic>{
-      'x': instance.x,
-      'y': instance.y,
+      'x': '${instance.x}',
+      'y': '${instance.y}',
     };
