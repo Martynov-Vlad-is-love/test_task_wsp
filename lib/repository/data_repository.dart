@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:test_task_wsp/model/condition_data.dart';
+import 'package:test_task_wsp/model/result.dart';
 import 'package:test_task_wsp/repository/repository.dart';
 import 'package:http/http.dart' as http;
 
-class DataRepository implements Repository<ConditionData> {
+class DataRepository implements Repository {
   @override
   Future<List<ConditionData>> get(String apiPath) async {
     final List<ConditionData> result = [];
@@ -22,12 +23,23 @@ class DataRepository implements Repository<ConditionData> {
   }
 
   @override
-  Future<Map<String, dynamic>> post(ConditionData data, String apiPath) async {
-    final response = await http.post(Uri.parse(apiPath));
-    Map<String, dynamic> data = {};
-    if(response.statusCode == 200){
-      data = jsonDecode(response.body) as Map<String, dynamic>;
+  Future<void> post(List<Result> data, String apiPath) async {
+    final result = [];
+    for(final element in data){
+      result.add(element.toJson());
     }
-    return data;
+    final encoded = jsonEncode(result);
+    print(encoded);
+    final header = {
+      'accept': 'application/json',
+      'Content-type': 'application/json',
+    };
+    final response = await http.post(Uri.parse(apiPath),body: jsonEncode(result), headers: header);
+    if(response.statusCode != 200){
+      print(response.body);
+      throw Exception('Status code ${response.statusCode}');
+
+      //data = jsonDecode(response.body) as Map<String, dynamic>;
+    }
   }
 }

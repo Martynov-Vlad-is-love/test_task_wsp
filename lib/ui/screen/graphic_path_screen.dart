@@ -12,25 +12,7 @@ class GraphicPathScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final resultController = context.watch<ResultController>();
     final fields = resultController.results[index].fields;
-    int maxLine = 0;
-    fields.forEach((element) {
-      if (element.length > maxLine) {
-        maxLine = element.length;
-      }
-    });
-    Map<int, List<int>> convertedFields = {};
-    int position = 0;
-    for (int iterator = 0; iterator < fields.length; iterator++) {
-      for (int secondIterator = 0;
-          secondIterator < fields[iterator].length;
-          secondIterator++) {
-        final map = {
-          position: [secondIterator, iterator]
-        };
-        convertedFields.addAll(map);
-        position++;
-      }
-    }
+    Map<int, List<int>> convertedFields = FieldParser.createFields(fields);
 
     final result = resultController.results[index];
     return Scaffold(

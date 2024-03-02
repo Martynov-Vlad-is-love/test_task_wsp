@@ -4,6 +4,7 @@ import 'package:test_task_wsp/algorithm/breadth_first_search.dart';
 import 'package:test_task_wsp/algorithm/result_parser.dart';
 import 'package:test_task_wsp/controller/data_controller.dart';
 import 'package:test_task_wsp/controller/result_controller.dart';
+import 'package:test_task_wsp/model/condition_data.dart';
 import 'package:test_task_wsp/ui/screen/process_screen.dart';
 import 'package:test_task_wsp/ui/widget/bottom_wide_button.dart';
 
@@ -106,16 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           );
                           final conditionData = await dataController.get(api);
-                          for (final element in conditionData) {
-                            final rawResult = pathfinder.findShortestPath(
-                                element.start, element.end, element.field);
-                            final resultString =
-                                ResultParser.parseString(rawResult);
-                            final resultMap =
-                                ResultParser.parsePointsToMap(rawResult);
-                            resultController.addResults(resultMap, resultString,
-                                rawResult, element.field);
-                          }
+                          _createResult(
+                              conditionData, resultController, pathfinder);
                         }
                       },
                     ),
@@ -127,6 +120,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  void _createResult(List<ConditionData> data,
+      ResultController resultController, BreadthFirstSearch pathfinder) {
+    for (final element in data) {
+      final id = element.id;
+      final rawResult = pathfinder.findShortestPath(
+          element.start, element.end, element.field);
+
+      final resultString = ResultParser.parseString(rawResult);
+      final resultMap = ResultParser.parsePointsToMap(rawResult);
+      resultController.addResults(
+          id, resultMap, resultString, rawResult, element.field);
+    }
   }
 
   bool _apiValidator(String apiKey, BuildContext context) {

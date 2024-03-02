@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:test_task_wsp/algorithm/breadth_first_search.dart';
+import 'package:test_task_wsp/controller/data_controller.dart';
+import 'package:test_task_wsp/controller/result_controller.dart';
 
 //import 'package:test_task_wsp/controller/data_controller.dart';
 //import 'package:test_task_wsp/controller/result_controller.dart';
@@ -15,8 +17,8 @@ class ProcessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pathfinder = context.watch<BreadthFirstSearch>();
-    //final dataController = context.watch<DataController>();
-    //final resultController = context.watch<ResultController>();
+    final dataController = context.watch<DataController>();
+    final resultController = context.watch<ResultController>();
 
     return Scaffold(
       appBar: AppBar(
@@ -69,7 +71,7 @@ class ProcessScreen extends StatelessWidget {
                       text: 'Send results to server',
                       size: size,
                       onPressed: () async {
-                        //await dataController.post();
+                        await dataController.post(resultController.results);
                         if (pathfinder.progress == 1) {
                           Navigator.push<void>(
                             context,

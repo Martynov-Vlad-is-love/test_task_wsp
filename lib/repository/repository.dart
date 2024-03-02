@@ -1,5 +1,7 @@
-abstract class Repository<T> {
-  Future<List<T>> get(String apiPath);
+import 'package:test_task_wsp/model/result.dart';
 
-  Future<Map<String, dynamic>> post(T data, String apiPath);
+abstract class Repository {
+  Future<List> get(String apiPath);
+
+  Future<void> post(List<Result> data, String apiPath);
 }
